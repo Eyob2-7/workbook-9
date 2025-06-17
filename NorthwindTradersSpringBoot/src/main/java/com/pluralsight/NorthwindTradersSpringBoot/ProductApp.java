@@ -3,7 +3,6 @@ package com.pluralsight.NorthwindTradersSpringBoot;
 import com.pluralsight.NorthwindTradersSpringBoot.dao.ProductDao;
 import com.pluralsight.NorthwindTradersSpringBoot.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +14,6 @@ public class ProductApp implements CommandLineRunner {
 
     //create an instance of our productDao
     @Autowired
-    @Qualifier("jdbcProductDao")
     private ProductDao productDao;
 
     @Override
