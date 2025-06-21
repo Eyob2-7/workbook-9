@@ -2,29 +2,41 @@ package com.pluralsight.NorthwindTradersAPI.controllers;
 
 import com.pluralsight.NorthwindTradersAPI.dao.ProductDao;
 import com.pluralsight.NorthwindTradersAPI.models.Product;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 public class ProductsController {
 
+    @Autowired
     private ProductDao productDao;
 
-    // Constructor injection
-    public ProductsController(ProductDao productDao) {
-        this.productDao = productDao;
-    }
 
-    @GetMapping("/products")
+
+    @GetMapping("/api/products")
     public List<Product> getAllProducts() {
         return productDao.getAll();
     }
 
-    @GetMapping("/products/{id}")
+    @GetMapping("/api/products/{id}")
     public Product getProductById(@PathVariable int id) {
         return productDao.getById(id);
+    }
+
+    @PostMapping("/api/products")
+    public Product add(@RequestBody Product product){
+        return productDao.add(product);
+    }
+
+    @PutMapping("/api/products/{id}")
+    public void update(@PathVariable int id, @RequestBody Product product){
+        productDao.updateById(id, product);
+    }
+
+    @DeleteMapping("/api/products/{id}")
+    public void delete(@PathVariable int id){
+        productDao.deleteById(id);
     }
 }
